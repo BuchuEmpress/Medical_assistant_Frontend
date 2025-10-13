@@ -1,0 +1,105 @@
+# 🌐 Frontend – Medical Care AI Assistant Interface
+
+This is the frontend for the Medical Care AI Assistant, built with React and Tailwind CSS. It connects to a FastAPI backend that handles chat, medical analysis, image processing, and research using Gemini and Tavily APIs. The UI is designed to be clean, responsive, and intuitive for users interacting with the assistant.
+
+---
+
+## 🛠️ Tech Stack
+
+- **React** – Frontend framework
+- **Vite** – Fast dev server and build tool
+- **Tailwind CSS** – Utility-first styling
+- **Axios** – For API requests
+- **React Router** – Page navigation
+- **PostCSS** – CSS transformation
+- **Environment Variables** – `.env.production` for config
+
+---
+
+## 📁 Folder Structure
+
+```
+Medical Care AI FRONTEND/
+├── README.md                   # Project documentation
+└── frontend/
+    ├── app/                    # Mirrors backend structure (shared logic)
+    ├── build/                  # Production build output
+    │   ├── static/
+    │   ├── asset-manifest.json
+    │   └── index.html
+    ├── node_modules/           # Installed dependencies
+    ├── public/
+    │   └── index.html          # HTML template
+    ├── src/
+    │   ├── App.js              # Root component
+    │   ├── index.js            # Entry point
+    │   └── index.css           # Global styles
+    ├── .env.production         # Production environment variables
+    ├── .gitignore              # Git exclusions
+    ├── package.json            # Project metadata and scripts
+    ├── package-lock.json       # Dependency lock file
+    ├── postcss.config.js       # PostCSS config
+    └── tailwind.config.js      # Tailwind CSS config
+```
+
+---
+
+## 🚀 How It Works
+
+Each page in the frontend connects to a backend route:
+
+| Frontend Page     | Backend Endpoint        | Purpose                          |
+|-------------------|-------------------------|----------------------------------|
+| Chat              | `/chat`                 | Sends messages to Gemini         |
+| Research          | `/research`             | Uses Tavily to search the web    |
+| Analyze Text      | `/analysis`             | Analyzes medical text            |
+| Analyze Image     | `/image`                | Describes uploaded image         |
+| Health Check      | `/health`               | Verifies backend status          |
+
+All requests are sent via Axios. Responses are rendered in real time, and usage limits are handled gracefully in the UI.
+
+---
+
+## 🔐 Rate Limiting
+
+- The backend tracks usage per IP.
+- If limits are exceeded:
+  - Gemini: 200 requests/day
+  - Tavily: 1000 requests/month
+- The frontend displays a warning and disables further requests until reset.
+
+---
+
+## 🧪 Local Setup
+
+1. Navigate to the frontend folder:
+   ```bash
+   cd frontend
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the dev server:
+   ```bash
+   npm run dev
+   ```
+
+4. Make sure your backend is running locally or hosted, and update the API base URL in your Axios service file.
+
+---
+
+## 💡 Notes
+
+- `.env.production` holds your public-facing config (e.g., API base URL).
+- Tailwind CSS is configured via `tailwind.config.js` and `postcss.config.js`.
+- You can customize the UI, add authentication, or expand features as needed.
+
+---
+
+## 🙌 Credits
+
+Frontend crafted by Empress 👑 and her AI companion. Powered by React, Tailwind, Gemini, Tavily, and a clear vision for intelligent healthcare support.
+```
