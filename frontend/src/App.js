@@ -239,7 +239,7 @@ function TextAnalysisPage() {
     if (!text.trim()) return;
     setIsLoading(true);
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/api/analyze`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/api/analyze-text`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text, context: '', language })
@@ -303,7 +303,7 @@ function ImageAnalysisPage() {
     formData.append('file', file);
     formData.append('language', language);
     try {
-      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/api/image`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/api/analyze-image`, {
         method: 'POST',
         body: formData
       });
