@@ -188,6 +188,11 @@ function ChatPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: userMessage, language })
       });
+      //for token exhaustion
+       if (response.status === 429) {
+        setMessages(prev => [...prev, { type: 'ai', text: '⚠️ You’ve reached your daily chat limit. Please try again later.' }]);
+        return;
+      }
       const data = await response.json();
       setMessages(prev => [...prev, { type: 'ai', text: data.response }]);
     } catch (error) {
@@ -244,6 +249,12 @@ function TextAnalysisPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text, context: '', language })
       });
+
+       // for token exhaustion
+      if (response.status === 429) {
+        alert("⚠️ You've reached your daily analysis limit. Please try again later.");
+        return;
+      }
       const data = await response.json();
       setAnalysis(data);
     } catch (error) {
@@ -307,6 +318,12 @@ function ImageAnalysisPage() {
         method: 'POST',
         body: formData
       });
+
+       //for token exhaustion
+      if (response.status === 429) {
+       alert("⚠️ You've reached your daily image analysis limit. Please try again later.");
+        return;
+      }
       const data = await response.json();
       setAnalysis(data);
     } catch (error) {
@@ -369,6 +386,12 @@ function ResearchPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query, max_results: 5, language })
       });
+
+      // for token exhaustion
+      if (response.status === 429) {
+        alert("⚠️ You've reached your monthly research limit. Please try again later.");
+        return;
+      }
       const data = await response.json();
       setResults(data);
     } catch (error) {
