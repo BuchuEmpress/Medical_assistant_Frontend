@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext } from 'react';
 import { Send, Moon, Sun, Menu, X, Brain, FileText, Image, Search, Heart, Upload, Loader2, Globe } from 'lucide-react';
-import React, { useState } from "react";
+
 import axios from "axios";
 
 function App() {
