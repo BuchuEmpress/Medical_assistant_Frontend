@@ -3,58 +3,58 @@ import { Send, Moon, Sun, Menu, X, Brain, FileText, Image, Search, Heart, Upload
 
 import axios from "axios";
 
-function App() {
-  const [conversation, setConversation] = useState([]);
-  const [input, setInput] = useState("");
+// function App() {
+//   const [conversation, setConversation] = useState([]);
+//   const [input, setInput] = useState("");
 
-  const handleSend = async () => {
-    if (!input.trim()) return;
+//   const handleSend = async () => {
+//     if (!input.trim()) return;
 
-    const updatedConversation = [
-      ...conversation,
-      { role: "user", content: input }
-    ];
+//     const updatedConversation = [
+//       ...conversation,
+//       { role: "user", content: input }
+//     ];
 
-    setConversation(updatedConversation);
-    setInput("");
+//     setConversation(updatedConversation);
+//     setInput("");
 
-    try {
-      const response = await axios.post("https://medical-assistant-1-a1cg.onrender.com", {
-        messages: updatedConversation
-      });
+//     try {
+//       const response = await axios.post("https://medical-assistant-1-a1cg.onrender.com", {
+//         messages: updatedConversation
+//       });
 
-      setConversation([
-        ...updatedConversation,
-        { role: "assistant", content: response.data.reply }
-      ]);
-    } catch (error) {
-      console.error("Error sending message:", error);
-    }
-  };
+//       setConversation([
+//         ...updatedConversation,
+//         { role: "assistant", content: response.data.reply }
+//       ]);
+//     } catch (error) {
+//       console.error("Error sending message:", error);
+//     }
+//   };
 
-  return (
-    <div style={{ maxWidth: "600px", margin: "auto", padding: "20px" }}>
-      <h2>Medical Care AI Chat</h2>
-      <div style={{ marginBottom: "20px" }}>
-        {conversation.map((msg, index) => (
-          <div key={index}>
-            <strong>{msg.role}:</strong> {msg.content}
-          </div>
-        ))}
-      </div>
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Type your message..."
-        style={{ width: "80%", padding: "10px" }}
-      />
-      <button onClick={handleSend} style={{ padding: "10px", marginLeft: "10px" }}>
-        Send
-      </button>
-    </div>
-  );
-}
+//   return (
+//     <div style={{ maxWidth: "600px", margin: "auto", padding: "20px" }}>
+//       <h2>Medical Care AI Chat</h2>
+//       <div style={{ marginBottom: "20px" }}>
+//         {conversation.map((msg, index) => (
+//           <div key={index}>
+//             <strong>{msg.role}:</strong> {msg.content}
+//           </div>
+//         ))}
+//       </div>
+//       <input
+//         type="text"
+//         value={input}
+//         onChange={(e) => setInput(e.target.value)}
+//         placeholder="Type your message..."
+//         style={{ width: "80%", padding: "10px" }}
+//       />
+//       <button onClick={handleSend} style={{ padding: "10px", marginLeft: "10px" }}>
+//         Send
+//       </button>
+//     </div>
+//   );
+// }
 
 
 
