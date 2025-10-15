@@ -233,9 +233,21 @@ function ChatPage() {
   const [chatInput, setChatInput] = useState('');
   const [messages, setMessages] = useState([{ type: 'ai', text: t.hello }]);
   const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = React.useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  React.useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const handleSendMessage = async () => {
-    if (!chatInput.trim()) return;
+    if (!chatInput.trim()) {
+      alert('Please enter a message');
+      return;
+    }
     const userMessage = chatInput;
     setMessages(prev => [...prev, { type: 'user', text: userMessage }]);
     setChatInput('');
@@ -259,7 +271,11 @@ function ChatPage() {
       const data = await response.json();
       setMessages(prev => [...prev, { type: 'ai', text: data.response }]);
     } catch (error) {
-      setMessages(prev => [...prev, { type: 'ai', text: 'Error: Unable to connect. Please ensure backend is running.' }]);
+      console.error('Chat error:', error);
+      setMessages(prev => [...prev, { 
+        type: 'ai', 
+        text: error.response?.data?.detail || 'Error: Unable to connect. Please ensure backend is running.' 
+      }]);
     } finally {
       setIsLoading(false);
     }
@@ -277,6 +293,7 @@ function ChatPage() {
               </div>
             </div>
           ))}
+          <div ref={messagesEndRef} />
           {isLoading && (
             <div className="flex justify-start">
               <div className={`p-4 rounded-lg ${isDark ? 'bg-teal-900/50' : 'bg-white'}`}>
@@ -304,7 +321,10 @@ function TextAnalysisPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleAnalyze = async () => {
-    if (!text.trim()) return;
+    if (!text.trim()) {
+      alert('Please enter text to analyze');
+      return;
+    }
     setIsLoading(true);
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/api/analyze-text`, {
@@ -327,7 +347,8 @@ function TextAnalysisPage() {
       const data = await response.json();
       setAnalysis(data);
     } catch (error) {
-      alert('Error connecting to backend');
+      console.error('Analysis error:', error);
+      alert(error.response?.data?.detail || 'Error connecting to backend');
     } finally {
       setIsLoading(false);
     }
@@ -377,7 +398,14 @@ function ImageAnalysisPage() {
   };
 
   const handleAnalyze = async () => {
-    if (!file) return;
+    if (!file) {
+      alert('Please select an image first');
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      alert('File size must be less than 10MB');
+      return;
+    }
     setIsLoading(true);
     const formData = new FormData();
     formData.append('file', file);
@@ -397,7 +425,8 @@ function ImageAnalysisPage() {
       const data = await response.json();
       setAnalysis(data);
     } catch (error) {
-      alert('Error connecting to backend');
+      console.error('Image analysis error:', error);
+      alert(error.response?.data?.detail || 'Error connecting to backend');
     } finally {
       setIsLoading(false);
     }
@@ -448,7 +477,10 @@ function ResearchPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = async () => {
-    if (!query.trim()) return;
+    if (!query.trim()) {
+      alert('Please enter a search query');
+      return;
+    }
     setIsLoading(true);
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/api/research`, {
@@ -471,7 +503,8 @@ function ResearchPage() {
       const data = await response.json();
       setResults(data);
     } catch (error) {
-      alert('Error connecting to backend');
+      console.error('Research error:', error);
+      alert(error.response?.data?.detail || 'Error connecting to backend');
     } finally {
       setIsLoading(false);
     }
