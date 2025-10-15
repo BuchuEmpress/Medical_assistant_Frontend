@@ -244,7 +244,12 @@ function ChatPage() {
       const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMessage, language })
+        body: JSON.stringify({
+          user_id: "empress123", // You can make this dynamic later
+          message: userMessage,
+          language: language
+        })
+
       });
       //for token exhaustion
        if (response.status === 429) {
@@ -305,7 +310,13 @@ function TextAnalysisPage() {
       const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/api/analyze-text`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text, context: '', language })
+        body: JSON.stringify({
+          user_id: "empress123", // 🔑 Enables memory tracking
+          text,
+          context: '',
+          language
+        })
+
       });
 
        // for token exhaustion
@@ -371,6 +382,7 @@ function ImageAnalysisPage() {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('language', language);
+    formData.append('user_id', 'empress123'); // 🔑 Enables memory
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/api/analyze-image`, {
         method: 'POST',
@@ -442,7 +454,13 @@ function ResearchPage() {
       const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/api/research`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query, max_results: 5, language })
+        body: JSON.stringify({
+          user_id: "empress123", // 🔑 Enables memory tracking
+          query,
+          max_results: 5,
+          language
+        })
+
       });
 
       // for token exhaustion
