@@ -529,13 +529,13 @@ function MediCareApp() {
   );
 }
 
-// export default function App() {
-//   return (
-//     <ThemeProvider>
-//       <LanguageProvider>
-//         <MediCareApp />
-//       </LanguageProvider>
-//     </ThemeProvider>
-//   );
-// }
+export default function App() {
+  return (
+    <ThemeProvider>
+      <LanguageProvider>
+        <MediCareApp />
+      </LanguageProvider>
+    </ThemeProvider>
+  );
+}
 
