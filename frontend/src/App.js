@@ -269,6 +269,8 @@ function ChatPage() {
         return;
       }
       const data = await response.json();
+      console.log('Backend response:', data);  
+      console.log('Response text:', data.response); 
       setMessages(prev => [...prev, { type: 'ai', text: data.response }]);
     } catch (error) {
       console.error('Chat error:', error);
@@ -499,6 +501,9 @@ function ResearchPage() {
         return;
       }
       const data = await response.json();
+      console.log('Research response:', data); 
+      console.log('Summary:', data.summary);  
+      console.log('Results:', data.results);  
       setResults(data);
     } catch (error) {
       console.error('Research error:', error);
