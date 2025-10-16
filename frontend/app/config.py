@@ -15,6 +15,9 @@ class Settings(BaseSettings):
     temperature: float = Field(default=0.7, ge=0.0, le=2.0)
     max_tokens: int = Field(default=2048, ge=100, le=8192)
     max_file_size: int = Field(default=10 * 1024 * 1024)
+    gemini_daily_limit: int = Field(default=200)
+    tavily_monthly_limit: int = Field(default=1000)
+
 
     class Config:
         env_file = ".env"

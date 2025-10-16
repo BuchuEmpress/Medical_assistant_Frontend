@@ -11,19 +11,21 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
+# Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins_list,
+    allow_origins=settings.cors_origins_list + ["https://medical-assistant-frontend.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# Include route modules
 app.include_router(health.router)
 app.include_router(analysis.router)
 app.include_router(research.router)
 
-
+# Root route for Render health check + general info
 @app.get("/")
 async def root():
     return {

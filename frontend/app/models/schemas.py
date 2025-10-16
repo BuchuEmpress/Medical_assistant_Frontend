@@ -9,6 +9,7 @@ class HealthCheckResponse(BaseModel):
 
 
 class ChatRequest(BaseModel):
+    user_id: str = Field(..., min_length=1)
     message: str = Field(..., min_length=1, max_length=1000)
     language: str = Field(default="en", pattern="^(en|fr)$")
 
@@ -48,6 +49,7 @@ class ImageAnalysisResponse(BaseModel):
 
 
 class ResearchRequest(BaseModel):
+    user_id: str = Field(..., min_length=1)
     query: str = Field(..., min_length=3, max_length=200)
     max_results: int = Field(default=5, ge=1, le=10)
     language: str = Field(default="en")
@@ -65,3 +67,4 @@ class ResearchResponse(BaseModel):
     results: list[ResearchResult]
     summary: str
     timestamp: datetime
+    
