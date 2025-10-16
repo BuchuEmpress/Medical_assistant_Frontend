@@ -257,7 +257,6 @@ function ChatPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          user_id: "empress123", // You can make this dynamic later
           message: userMessage,
           language: language
         })
@@ -331,7 +330,6 @@ function TextAnalysisPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          user_id: "empress123", // 🔑 Enables memory tracking
           text,
           context: '',
           language
@@ -410,7 +408,6 @@ function ImageAnalysisPage() {
     const formData = new FormData();
     formData.append('file', file);
     formData.append('language', language);
-    formData.append('user_id', 'empress123'); // 🔑 Enables memory
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL || 'http://localhost:8000'}/api/analyze-image`, {
         method: 'POST',
@@ -487,7 +484,6 @@ function ResearchPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          user_id: "empress123", // 🔑 Enables memory tracking
           query,
           max_results: 5,
           language
