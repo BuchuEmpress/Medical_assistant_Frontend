@@ -257,6 +257,7 @@ function ChatPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          user_id: "empress123", 
           message: userMessage,
           language: language
         })
@@ -332,7 +333,7 @@ function TextAnalysisPage() {
         body: JSON.stringify({
           text,
           context: '',
-          language
+          language: language
         })
 
       });
@@ -484,9 +485,10 @@ function ResearchPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          user_id: "empress123", 
           query,
           max_results: 5,
-          language
+          language: language
         })
 
       });
