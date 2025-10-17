@@ -48,7 +48,11 @@ async def search_medical_research(request: Request, body: ResearchRequest):
 Focus on the key takeaways and most important information."""
 
         # 🧠 Get summary from Gemini
-        summary = await get_chat_response(summary_prompt, body.language, body.user_id)
+        
+        summary = await get_chat_response(
+            message=summary_prompt, 
+            lanhuage=body.language, 
+            user_id=body.user_id)
         # 📦 Structure the research results
         research_results = [
             ResearchResult(
